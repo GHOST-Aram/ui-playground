@@ -1,0 +1,26 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    text-align: center;
+    margin-block-start: 4rem;
+}
+    #pasteArea {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        width: 300px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        cursor: pointer;
+        margin: auto;
+        color: rgb(5, 89, 89);
+    }
+
+    #preview img {
+        max-width: 100%;
+        margin-top: 10px;
+    }

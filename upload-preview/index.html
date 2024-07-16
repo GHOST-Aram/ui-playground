@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        font-family: sans-serif;
+    }
+    body{
+        text-align: center;
+        padding-block-start: 4rem;
+    }
+    button{
+        background-color: #0369a1;
+        color: #f1f5f9;
+        border-radius: 4px;
+        padding-inline: 1rem;
+        padding-block: .5rem;
+        border: none;
+    }
+
+    button:hover{
+        opacity: .7;
+        transition: all .75s;
+    }
+
+    input{
+        display: none;
+    }
+</style>
+<body>
+    <h1>Preview Before Upload</h1>
+    <input type="file" name="imageFile">
+    <button>Select Image</button>
+</body>
+<script>
+    const button  = document.querySelector('button')
+    const fileInput = document.querySelector('input')
+
+    button.addEventListener('click', () =>{
+        fileInput.click()
+    })
+
+    fileInput.addEventListener('change', (event) =>{
+        
+        //Get the file from files array
+        const file = event.target.files[0]
+
+        if(file){
+            const fileReader = new FileReader() 
+
+            //Set up event listener to the fileReader before begining to read
+            fileReader.onloadend = () => {
+
+                //Save the value read by the file reader in a variable
+                const imageSrc = fileReader.result
+
+                //try to select the img tag
+                const existingImgElement = document.querySelector('img')
+
+                //Check if the tag is not null, it then remove it before rendering the next
+                if(existingImgElement){
+                    document.body.removeChild(existingImgElement)
+                }
+
+                const img = document.createElement('img')
+                img.src = imageSrc
+                document.body.appendChild(img)
+            }
+
+            // Tell the fileReader to read this file as URL
+            fileReader.readAsDataURL(file) 
+        }
+
+    })
+</script>
+</html>
