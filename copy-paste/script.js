@@ -1,23 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
     const pasteArea = document.getElementById('pasteArea');
-    const preview = document.getElementById('preview');
-
+    
     pasteArea.addEventListener('paste', (event) => {
-        const items = event.clipboardData.items;
-
+        const items = event.clipboardData.items
         for (const item of items) {
             if (item.kind === 'file') {
-                const file = item.getAsFile();
+                const file = item.getAsFile()
+                
+                
                 const reader = new FileReader();
-
+                
                 reader.onloadend = (e) => {
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    preview.appendChild(img);
-                };
+                    const preview = document.querySelector('#preview')
+                    
+                    const url = e.target.result
 
-                reader.readAsDataURL(file);
+                    const img = document.createElement('img')
+                    img.src = url
+                    preview.appendChild(img)
+                };
+                reader.readAsDataURL(file)
             }
         }
     });
 });
+
